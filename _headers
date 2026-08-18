@@ -1,0 +1,30 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'none'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'
+
+# No 'unsafe-inline' anywhere, and no external origins at all. That is only
+# possible because the fonts are self-hosted, every style is in styles.css and
+# the only script is reveal.js. Adding a Google Fonts link, an inline <style>
+# or an analytics snippet all break this header — change the header
+# deliberately if that ever happens, rather than discovering it in a console.
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Unhashed filenames. They must revalidate or a visitor keeps a stylesheet that
+# no longer matches the markup it styles.
+/styles.css
+  Cache-Control: public, max-age=0, must-revalidate
+
+/reveal.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate

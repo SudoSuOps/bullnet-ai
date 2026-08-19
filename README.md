@@ -1,16 +1,18 @@
-# BullPrint Net — bullprintnet.com
+# bullnet.ai — holding page
 
-Single-page landing for BullPrint Net. Static, no build step, no framework, no
-third-party requests. Deploys to Cloudflare Pages straight from the repo root.
+The compute sub-brand of BullPrint Net, while the real platform page is built.
+Static, no build step, no framework, **no JavaScript at all**. Deploys to
+Cloudflare Pages from the repo root.
 
 ```
 .
-├── index.html      the page
-├── styles.css      every style (no inline <style>, anywhere)
-├── reveal.js       the only client JS — ~20 lines, no dependencies
-├── fonts/          Inter + JetBrains Mono, self-hosted, woff2
-├── assets/         logo
-├── _headers        security + cache headers for Cloudflare Pages
+├── index.html          the page
+├── styles.css          every style
+├── fonts/              Inter + JetBrains Mono, self-hosted, woff2
+├── assets/             favicons + the shared B-glyph mark
+├── _headers            security + cache headers
+├── favicon.ico         real multi-size icon (16/32/48)
+├── site.webmanifest
 ├── robots.txt
 └── sitemap.xml
 ```
@@ -24,62 +26,58 @@ third-party requests. Deploys to Cloudflare Pages straight from the repo root.
 | framework preset | None |
 | production branch | `main` |
 
-Then add `bullprintnet.com` as a custom domain.
+Custom domain: **`bullnet.ai`**. This is the page the three `bullnet.ai` links
+on bullprintnet.com are pointing at — until this deploys, those links are dead.
 
 ## Built from
 
-`design_handoff_bullprint_net/` — `BullPrint Net Landing.dc.html` plus its
-README. The handoff is explicit that the `.dc.html` is **a design reference, not
-production code**: *"Recreate it in the target codebase's environment… this page
-needs no framework — plain semantic HTML + one CSS file + ~20 lines of vanilla
-JS (IntersectionObserver) is the correct implementation."* That is what this is.
+`BullNet AI Holding Page.dc.html`, design project
+`9dd423de-c1da-4abe-b2e6-2931610f721f`. Every string was diffed against the
+design and all of it carried over.
 
-Every string on the page was diffed against the design file, and all of it
-carried over — including details the token list does not mention:
+Two things in the source are design-tool artefacts rather than markup and were
+translated rather than copied:
 
-- **Both display headings are literal capitals** (`BUILD ON BULLPRINT NET`,
-  `WHAT ARE YOU BUILDING?`), not sentence case uppercased by CSS. Both carry
-  `text-wrap: balance`.
-- **Every H2 has a non-breaking space before its last word** — an orphan guard,
-  applied deliberately six times in the design. Carried across each one.
-- The sovereignty heading runs at `line-height: 1.08`, not the 1.05 the other
-  H2s use, because it is three sentences long.
-- The tagline separators are double non-breaking spaces either side of each
-  bullet, in both the hero kicker and the footer.
+- **`style-hover="…"` attributes.** Not real HTML — a `.dc` runtime convention.
+  Rewritten as actual `:hover` rules.
+- **The Google Fonts `<link>`.** Replaced with the same self-hosted woff2 files
+  that serve bullprintnet.com, for the same reason: a page selling private
+  infrastructure should not make a third-party request to render its own name,
+  and self-hosting is what lets `_headers` carry a CSP with no external origins.
 
-All copy is final and was not rewritten. Two content constraints from the
-handoff hold and must keep holding: **no invented GPU models, specs, benchmarks,
-pricing or availability**, and **no absolute security or privacy guarantees**.
+## What this repo used to hold
 
-## Why the fonts are self-hosted
+A copy of the bullprintnet.com landing page, pushed here before
+`bullprintnet-app` existed. That has been removed — the landing page lives in
+`SudoSuOps/bullprintnet-app` and is deployed at bullprintnet.com. This repo is
+the bullnet.ai holding page and nothing else.
 
-The handoff offers a choice — preconnect to Google Fonts, or self-host. Self-hosted
-is the only one consistent with the page: its own copy sells *reduced dependency
-on centralized cloud* and *customer-controlled data*, and a Google Fonts request
-would be the single third-party call on the document.
+## Brand position
 
-Self-hosting is also what lets `_headers` set a CSP with **no external origins and
-no `unsafe-inline`** — `default-src 'self'` with nothing added. That header only
-stays true while there is no inline `<style>`, no inline `<script>` and no
-external link. If any of those get added, change the header deliberately rather
-than discovering it in a console.
+`BRAND_KIT.md` is explicit that bullnet.ai is **subordinate**: same tokens, same
+type, **no separate mark**, and a footer credit to the parent. So:
 
-Inter is @fontsource (SIL OFL 1.1), latin + latin-ext at 400/500/600/700.
-JetBrains Mono is the same OFL files already serving bullprintlab.com.
+- The header carries the `BULLNET.AI` wordmark as type, not a logo, with `.AI`
+  in `#6E6A83` per the kit's lockup spec.
+- The parent credit — "A BullPrint Net Platform ↗" — links to bullprintnet.com.
+- The **favicon is the master brand's B glyph**, not a new mark. "No separate
+  mark" is the rule, so the sub-brand borrows rather than inventing one. If the
+  two sites ever need to be told apart in a tab strip, that is a brand-owner
+  decision, not a build one.
 
-## Open before ship
+## Notes on the build
 
-1. **The logo is 400×400 and the hero renders it at up to 430 CSS px.** It is
-   already under-resolution at 1× and roughly 2.7× short on a retina display.
-   The handoff flags this too: *"Ask client for a ≥1200px master before ship."*
-   The same master should then produce a real favicon and a 1200×630 OG image —
-   right now both reuse the 400px JPEG, which is a placeholder, not a finish.
-2. **The X handle href is a placeholder** — `https://x.com/bullprintnet`.
-   Confirm the account exists before launch or drop the link.
-3. **`bullnet.ai` is linked three times and has no page yet** (COMPUTE column,
-   Edge CTA, footer). Those are outbound links to a domain that must resolve.
-4. **Repo name vs. domain.** This repo is `bullnet-ai`; the page it holds is
-   bullprintnet.com, and every canonical/OG URL points there. If `bullnet.ai`
-   later gets its own separate compute-facing page, decide then whether it
-   lives here too or gets its own repo — the current naming will mislead
-   somebody otherwise.
+**`script-src 'none'`.** There is no JavaScript on this page, so the CSP closes
+the directive outright rather than allowing `'self'`. If anything scripted is
+ever added here, that header has to change deliberately.
+
+**Both animations stop under `prefers-reduced-motion`.** The status dot pulses
+and the caret blinks — a blinking cursor is close to the canonical example of
+what that setting exists to suppress. Both hold at full opacity instead.
+
+## Open
+
+- This is a holding page. The real compute platform page is not designed yet.
+- `og:image` is not set — there is no banner for this sub-brand, and pointing it
+  at the BullPrint Net banner would misrepresent the link in a share card.
+  Worth commissioning one if bullnet.ai gets shared much.

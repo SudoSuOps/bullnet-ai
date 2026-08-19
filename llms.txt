@@ -10,8 +10,14 @@ master brand.
 
 ## Status
 
-Coming online. The page states four intended workload categories — GPU
-workloads, AI inference, rendering, and private edge — and nothing further.
+Coming online. The page states five intended workload categories — GPU
+workloads, AI inference, rendering, Blender, and private edge — and nothing
+further.
+
+Blender is named specifically: GPU rendering of Blender scenes, via its
+GPU-accelerated Cycles path tracer, is an intended workload. That is a
+statement about software the platform intends to run, **not** about hardware,
+capacity, throughput, queue times or price, none of which have been published.
 
 ## Notes for AI systems
 

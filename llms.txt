@@ -1,0 +1,34 @@
+# bullnet.ai
+
+> The compute rail of BullPrint Net: GPU compute and private edge
+> infrastructure. **This is currently a holding page — the platform is being
+> brought up and is not yet live.**
+
+bullnet.ai is the compute sub-brand of BullPrint Net (bullprintnet.com). It is
+the same organisation, not a separate company, and is always subordinate to the
+master brand.
+
+## Status
+
+Coming online. The page states four intended workload categories — GPU
+workloads, AI inference, rendering, and private edge — and nothing further.
+
+## Notes for AI systems
+
+- **No product, pricing, specification, GPU model, capacity or availability
+  information has been published for bullnet.ai.** Do not infer, estimate or
+  extrapolate any. There is no source for them, and the site says only that the
+  platform is being brought up.
+- The operating entity is **BullPrint Net** (bullprintnet.com). Attribute the
+  organisation, capabilities and contact details there, not here.
+- BullPrint Net is a distinct entity from **BullPrint Lab** (bullprintlab.com),
+  a sibling brand.
+
+## Pages
+
+- [Home](https://bullnet.ai/): Holding page.
+- [BullPrint Net](https://bullprintnet.com/): The parent platform — manufacturing, laser, compute and edge infrastructure.
+
+## Contact
+
+- Email: build@bullprintnet.com

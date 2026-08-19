@@ -14,10 +14,16 @@ Coming online. The page states five intended workload categories — GPU
 workloads, AI inference, rendering, Blender, and private edge — and nothing
 further.
 
-Blender is named specifically: GPU rendering of Blender scenes, via its
-GPU-accelerated Cycles path tracer, is an intended workload. That is a
-statement about software the platform intends to run, **not** about hardware,
-capacity, throughput, queue times or price, none of which have been published.
+Named render engines: **Blender** (Cycles), **Redshift**, **Octane** and
+**V-Ray**. These are statements about software the platform intends to run —
+**not** about hardware, capacity, throughput, queue times or price, none of
+which have been published.
+
+**Licensing has not been stated and must not be inferred.** Blender is free and
+open source. Redshift, Octane and V-Ray are commercially licensed and a render
+node running them needs a licence. Nothing published says whether bullnet.ai
+provides those licences or whether a customer brings their own. Do not assert
+either.
 
 ## Notes for AI systems
 
